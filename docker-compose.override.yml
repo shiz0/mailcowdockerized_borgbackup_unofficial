@@ -1,0 +1,29 @@
+services:
+    borgbackup_unofficial:
+        hostname: mailcowdockerized_borgbackup_unofficial
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - mailcowdockerized_borgbackup_unofficial_dbtemp:/backup/mariadb:ro
+            - mailcowdockerized_borgbackup_unofficial_redistemp:/backup/redis:ro
+            - /opt/mailcow-dockerized:/backup/mailcow-dockerized:ro
+            - crypt-vol-1:/backup/volumes/crypt:ro
+            - vmail-vol-1:/backup/volumes/vmail:ro
+            - rspamd-vol-1:/backup/volumes/rspamd:ro
+            - postfix-vol-1:/backup/volumes/postfix:ro
+            - /opt/backup/mailcow/secrets/known_hosts:/root/.ssh/known_hosts:ro
+            - /opt/backup/mailcow/secrets/id_rsa:/root/.ssh/id_rsa:ro
+            - /opt/backup/mailcow/secrets/borg_repo_pw:/root/borg_repo_pw:ro
+        environment:
+            - BORG_REPO=ssh://host:port/./<reponame>
+            - BORG_RSH=ssh -i /root/.ssh/id_rsa
+            - BORG_PASSPHRASE=/root/borg_repo_pw
+            - BACKUP_INTERVAL=5min
+            - BORG_INIT_CMD=--encryption=repokey
+            - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
+            - BORG_PRUNE_CMD=-n --list --force --keep-last 5
+        image: shiz0/mailcowdockerized_borgbackup_unofficial:latest
+
+volumes:
+    mailcowdockerized_borgbackup_unofficial_dbtemp:
+    mailcowdockerized_borgbackup_unofficial_redistemp:
+

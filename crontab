@@ -1,0 +1,12 @@
+PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+SHELL=/bin/sh
+ENV=/container.env
+
+# min   hour    day     month   weekdaycommand
+*/5	*       *       *       *       run-parts /etc/periodic/5min > /proc/1/fd/1 2>/proc/1/fd/2
+*/15	*       *       *       *       run-parts /etc/periodic/15min > /proc/1/fd/1 2>/proc/1/fd/2
+0       *       *       *       *       run-parts /etc/periodic/hourly > /proc/1/fd/1 2>/proc/1/fd/2
+0       3       *       *       *       run-parts /etc/periodic/daily > /proc/1/fd/1 2>/proc/1/fd/2
+0       4       *       *       6       run-parts /etc/periodic/weekly > /proc/1/fd/1 2>/proc/1/fd/2
+0       5       1       *       *       run-parts /etc/periodic/monthly > /proc/1/fd/1 2>/proc/1/fd/2
+#-	-       -       -       -       run-parts /etc/periodic/custom > /proc/1/fd/1 2>/proc/1/fd/2
