@@ -11,7 +11,7 @@ DBVERSION=$(docker exec -i "$MARIADB_CONTAINER" mysqld --version | pcregrep -o -
 # copy redis to tempvol
 mkdir -p /backup/redis
 docker exec $(docker ps -qf name=redis-mailcow) redis-cli save
-rsync -aAXH /redistemp /backup/redis 
+rsync -a /redistemp/* /backup/redis 
 
 # get own dbtemp volume
 TEMPVOL=$(docker volume ls -qf name="$HOSTNAME"_dbtemp)
