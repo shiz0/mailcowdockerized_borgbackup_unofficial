@@ -18,6 +18,8 @@ services:
             - BORG_PASSPHRASE=/root/borg_repo_pw
             - BACKUP_INTERVAL=hourly
 	    - CMPS_PRJ=${COMPOSE_PROJECT_NAME} 
+	    - MARIADB_USER=root
+            - MARIADB_PW=${DBROOT}
             - BORG_INIT_CMD=--encryption=repokey
             - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
             - BORG_PRUNE_CMD=-n --list --force --keep-last 5
