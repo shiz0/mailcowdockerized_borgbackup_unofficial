@@ -1,10 +1,9 @@
 services:
-    borgbackup_unofficial:
+    borgbackup_unofficial-mailcow:
         hostname: mailcowdockerized_borgbackup_unofficial
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
-            - mailcowdockerized_borgbackup_unofficial_dbtemp:/backup/mariadb:ro
-            - mailcowdockerized_borgbackup_unofficial_redistemp:/backup/redis:ro
+            - borgbackup_unofficial_dbtemp:/backup/mariadb:ro
             - /opt/mailcow-dockerized:/backup/mailcow-dockerized:ro
             - crypt-vol-1:/backup/volumes/crypt:ro
             - vmail-vol-1:/backup/volumes/vmail:ro
