@@ -21,7 +21,7 @@ docker run --name mariabackup_temp --rm \
         -v "$TEMPVOL":/backup \
         mariadb:"$DBVERSION" \
 	/bin/sh -c \
-	"mariabackup --host "$MARIADB_CONTAINER" --user "$DBUSER" --password "$DBPASS" --backup --version-check --rsync --target-dir=/backup ; \
+	"mariabackup --host "$MARIADB_CONTAINER" --user "$MARIADB_USER" --password "$MARIADB_PW" --backup --version-check --rsync --target-dir=/backup ; \
 	mariabackup --prepare --target-dir=/backup ; \
 	chown -R mysql:mysql /backup"
 
