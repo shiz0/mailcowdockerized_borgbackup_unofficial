@@ -2,7 +2,7 @@ Current state: Testing / WiP \
 ToDo: Test, Complete Readme.
 
 # mailcowdockerized_borgbackup_unofficial
-Backup your mailcow-dockerized with borg
+Backup your [mailcow-dockerized](https://mailcow.email/) with [borg](https://www.borgbackup.org/)
 
 Designed to be added to the mailcow-dockerized stack via docker-compose.override.yml
 
