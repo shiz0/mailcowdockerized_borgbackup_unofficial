@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MARIADB_CONTAINER="$COMPOSE_PROJECT_NAME"_mysql-mailcow
+MARIADB_CONTAINER=$(docker container ls -qf name=${CMPS_PRJ}_mysql-mailcow)
 
 # get database conatiner's network
 DBNET=$(docker inspect --format='{{range .NetworkSettings.Networks}}{{println .NetworkID}}{{end}}' "$MARIADB_CONTAINER" | head -1)

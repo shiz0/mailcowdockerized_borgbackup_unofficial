@@ -18,6 +18,7 @@ services:
             - BORG_RSH=ssh -i /root/.ssh/id_rsa
             - BORG_PASSPHRASE=/root/borg_repo_pw
             - BACKUP_INTERVAL=hourly
+	    - CMPS_PRJ=${COMPOSE_PROJECT_NAME} 
             - BORG_INIT_CMD=--encryption=repokey
             - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
             - BORG_PRUNE_CMD=-n --list --force --keep-last 5
