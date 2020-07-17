@@ -3,7 +3,7 @@ services:
         hostname: ${COMPOSE_PROJECT_NAME}_borgbackup_unofficial
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
-            - borgbackup_unofficial_dbtemp:/backup/mariadb:ro
+            - borgbackup_unofficial_dbtemp:/backup/mariadb:rw
             - /opt/mailcow-dockerized:/backup/mailcow-dockerized:ro
             - crypt-vol-1:/backup/volumes/crypt:ro
             - vmail-vol-1:/backup/volumes/vmail:ro
