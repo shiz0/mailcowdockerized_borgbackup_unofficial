@@ -22,6 +22,7 @@ services:
             - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
             - BORG_PRUNE_CMD=-n --list --force --keep-last 5
         image: shiz0/mailcowdockerized_borgbackup_unofficial:latest
+	network_mode: none
 
 volumes:
     mailcowdockerized_borgbackup_unofficial_dbtemp:
