@@ -12,6 +12,7 @@ services:
             - /opt/backup/mailcow/secrets/known_hosts:/root/.ssh/known_hosts:ro
             - /opt/backup/mailcow/secrets/id_rsa:/root/.ssh/id_rsa:ro
             - /opt/backup/mailcow/secrets/borg_repo_pw:/root/borg_repo_pw:ro
+	    - /opt/backup/mailcow/restore:/restore:rw
         environment:
             - BORG_REPO=ssh://host:port/./<reponame>
             - BORG_RSH=ssh -i /root/.ssh/id_rsa
