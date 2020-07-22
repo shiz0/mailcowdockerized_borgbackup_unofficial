@@ -10,6 +10,7 @@ services:
             - rspamd-vol-1:/backup/volumes/rspamd:ro
             - postfix-vol-1:/backup/volumes/postfix:ro
             - /opt/backup/mailcow/secrets/known_hosts:/root/.ssh/known_hosts:ro
+	    - /opt/backup/mailcow/secrets/ssh_config:/root/.ssh/config:ro,Z
             - /opt/backup/mailcow/secrets/id_rsa:/root/.ssh/id_rsa:ro
             - /opt/backup/mailcow/secrets/borg_repo_pw:/root/borg_repo_pw:ro
 	    - /opt/backup/mailcow/restore:/restore:rw
