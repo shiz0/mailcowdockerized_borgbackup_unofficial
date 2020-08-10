@@ -1,5 +1,4 @@
-Current state: Testing / WiP \
-ToDo: Test, Complete Readme.
+ToDo: Use versioned base, Complete Readme.
 
 # mailcowdockerized_borgbackup_unofficial
 Backup your [mailcow-dockerized](https://mailcow.email/) with [borg](https://www.borgbackup.org/)
