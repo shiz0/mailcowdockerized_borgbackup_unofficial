@@ -1,37 +1,37 @@
 services:
-    borgbackup_unofficial-mailcow:
-        hostname: ${COMPOSE_PROJECT_NAME}_borgbackup_unofficial
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-            - borgbackup_unofficial_dbtemp:/backup/mariadb:rw
-            - /opt/mailcow-dockerized:/backup/mailcow-dockerized:ro
-            - crypt-vol-1:/backup/volumes/crypt:ro
-            - vmail-vol-1:/backup/volumes/vmail:ro
-            - rspamd-vol-1:/backup/volumes/rspamd:ro
-            - postfix-vol-1:/backup/volumes/postfix:ro
-            - /opt/backup/mailcow/secrets/known_hosts:/root/.ssh/known_hosts:ro
-	    - /opt/backup/mailcow/secrets/ssh_config:/root/.ssh/config:ro,Z
-            - /opt/backup/mailcow/secrets/id_rsa:/root/.ssh/id_rsa:ro
-            - /opt/backup/mailcow/secrets/borg_repo_pw:/root/borg_repo_pw:ro
-	    - /opt/backup/mailcow/restore:/restore:rw
-        environment:
-            - BORG_REPO=ssh://host:port/./<reponame>
-            - BORG_RSH=ssh -i /root/.ssh/id_rsa
-            - BORG_PASSPHRASE=/root/borg_repo_pw
-            - BACKUP_INTERVAL=hourly
-	    - CMPS_PRJ=${COMPOSE_PROJECT_NAME} 
-	    - MARIADB_USER=root
-            - MARIADB_PW=${DBROOT}
-            - BORG_INIT_CMD=--encryption=repokey
-            - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
-            - BORG_PRUNE_CMD=-n --list --force --keep-last 5
-        image: shiz0/mailcowdockerized_borgbackup_unofficial:latest
-	restart: always
-        security_opt:
-          - label:disable
-	networks:
-	  mailcow-network:
-            aliases:
-              - borgbackup_unofficial
+  borgbackup_unofficial-mailcow:
+    hostname: ${COMPOSE_PROJECT_NAME}_borgbackup_unofficial
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - mailcowdockerized_borgbackup_unofficial_dbtemp:/backup/mariadb:rw
+      - /opt/mailcow-dockerized:/backup/mailcow-dockerized:ro
+      - crypt-vol-1:/backup/volumes/crypt:ro
+      - vmail-vol-1:/backup/volumes/vmail:ro
+      - rspamd-vol-1:/backup/volumes/rspamd:ro
+      - postfix-vol-1:/backup/volumes/postfix:ro
+      - /opt/backup/mailcow/secrets/known_hosts:/root/.ssh/known_hosts:ro
+      - /opt/backup/mailcow/secrets/ssh_config:/root/.ssh/config:ro,Z
+      - /opt/backup/mailcow/secrets/id_rsa:/root/.ssh/id_rsa:ro
+      - /opt/backup/mailcow/secrets/borg_repo_pw:/root/borg_repo_pw:ro
+      - /opt/backup/mailcow/restore:/restore:rw
+    environment:
+      - BORG_REPO=ssh://host:port/./<reponame>
+      - BORG_RSH=ssh -i /root/.ssh/id_rsa
+      - BORG_PASSPHRASE=/root/borg_repo_pw
+      - BACKUP_INTERVAL=hourly
+      - CMPS_PRJ=${COMPOSE_PROJECT_NAME} 
+      - MARIADB_USER=root
+      - MARIADB_PW=${DBROOT}
+      - BORG_INIT_CMD=--encryption=repokey
+      - BORG_CREATE_CMD=--stats ::{now:%Y-%m-%d_%H-%M-%S} /backup
+      - BORG_PRUNE_CMD=-n --list --force --keep-last 5
+    image: shiz0/mailcowdockerized_borgbackup_unofficial:latest
+    restart: always
+    security_opt:
+      - label:disable
+networks:
+  mailcow-network:
+    aliases:
+      - borgbackup_unofficial
 volumes:
     mailcowdockerized_borgbackup_unofficial_dbtemp:
