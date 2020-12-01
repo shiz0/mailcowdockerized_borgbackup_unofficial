@@ -57,7 +57,7 @@ The installation guide assumes in this case that a working mailcow-dockerized st
 * Creating a backup directory on the StorageBox and setting up a user:
   * Connect to a SFTP/SCP client via the address and port 23 on the StorageBox and create a new directory. Give the directory the permission '0700'. Example: `BorgBackups/mailcow`
   * Create a subdirectory (`BorgBackups/mailcow/.ssh`) and in it a file named `authorized_keys` and assign permission `0600` to this file
-  * Add to the file 'authorized_keys' on your StorageBox the content of the file `/opt/backup/mailcow/secrets/id_rsa.pub`
+  * Add to the file `authorized_keys` on your StorageBox the content of the file `/opt/backup/mailcow/secrets/id_rsa.pub`
   * Create a new sub-account in Hetzner's robot interface at your StorageBox and assign the directory `BorgBackups/mailcow` to it.
   <br/>Important: The StorageBox requires SSH access and if the mailcow is outside of the Hetzner network, external access must also be allowed/activated.
 * Set the password for the Borg repository:
@@ -69,14 +69,14 @@ The installation guide assumes in this case that a working mailcow-dockerized st
 
 ## Installation
 
-1. Kopiere den Inhalt der `docker-compose.override.yml.example` in dein Mailcow Verzeichnis in die Datei `docker-compose.override.yml`
+1. Copy the contents of the `docker-compose.override.yml.example` in your mailcow directory into the file `docker-compose.override.yml`
 
-2. Öffne die `docker-compose.override.yml` Datei mit einem Editor deiner Wahl und passe folgende Zeilen entsprechend deiner gewünschten Konfiguration an:
+2. Open the `docker-compose.override.yml` file with an editor of your choice and adjust the following lines according to your desired configuration:
     ```
     - BORG_REPO=ssh://uXXXXXX-subX@uXXXXXX.your-storagebox.de:23/./backup
     - BACKUP_INTERVAL=hourly
     ```
-    Ersetze in der URL von `BORG_REPO` die entsprechenden Nutzernamen und passe den Wert von `BACKUP_INTERVAL` an deinen gewünschten Interval an. Mögliche Werte hierfür sind `5min`, `15min`, `hourly`, `daily`, `weekly`, `monthly` oder `custom`. Bei der Wahl des Wertes `custom` musst du zusätzlich die Datei `crontab` aus diesem Repository nach `/opt/backup/mailcow` kopieren und entsprechend deinen Wünschen anpassen. Im Anschluss daran fügst du in der `docker-compose.override.yml` eine Verlinkung zu der `crontab` Datei hinzu:
+    Replace the corresponding usernames in the URL of `BORG_REPO` and adjust the value of `BACKUP_INTERVAL` to your desired interval. Possible values are `5min`, `15min`, `hourly`, `daily`, `weekly`, `monthly` or `custom`. If you choose the value `custom` you also have to copy the file `crontab` from this repository to `/opt/backup/mailcow` and adjust it to your needs. Afterwards you add a link to the `crontab` file in the `docker-compose.override.yml`:
     ```
     borgbackup_unofficial-mailcow:
       volumes:
@@ -84,7 +84,7 @@ The installation guide assumes in this case that a working mailcow-dockerized st
         - /opt/backup/mailcow/crontab:/root/crontab
     ```
 
-3. Starten des Backup Containers:
+3. Start the backup container:
     ```
     $ cd /opt/mailcow-dockerized/ && docker-compose up -d
     ```
