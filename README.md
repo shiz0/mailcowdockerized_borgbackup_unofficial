@@ -69,7 +69,7 @@ The installation guide assumes in this case that a working mailcow-dockerized st
 
 ## Installation
 
-1. Copy the contents of the `docker-compose.override.yml.example` in your mailcow directory into the file `docker-compose.override.yml`
+1. Copy the contents of the `docker-compose.override.yml.example` into your mailcow directory in the file `docker-compose.override.yml`
 
 2. Open the `docker-compose.override.yml` file with an editor of your choice and adjust the following lines according to your desired configuration:
     ```
@@ -91,8 +91,7 @@ The installation guide assumes in this case that a working mailcow-dockerized st
 
 <br />
 
-For possible values/usage of BORG_REPO, BORG_RSH, BORG_PASSPHRASE, the BORG_*_CMD variables, as well as other borg commands, please consult the borg documentat
-ion at \
+For possible values/usage of BORG_REPO, BORG_RSH, BORG_PASSPHRASE, the BORG_*_CMD variables, as well as other borg commands, please consult the borg documentation at \
 https://borgbackup.readthedocs.io/
 
 <br />
