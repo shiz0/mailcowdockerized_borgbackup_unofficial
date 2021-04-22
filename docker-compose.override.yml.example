@@ -35,4 +35,4 @@ services:
           - borgbackup_unofficial
           
 volumes:
-    mailcowdockerized_borgbackup_unofficial_dbtemp:
+    borgbackup_unofficial_dbtemp:
