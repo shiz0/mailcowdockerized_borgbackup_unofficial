@@ -29,9 +29,10 @@ services:
     restart: always
     security_opt:
       - label:disable
-networks:
-  mailcow-network:
-    aliases:
-      - borgbackup_unofficial
+    networks:
+      mailcow-network:
+        aliases:
+          - borgbackup_unofficial
+          
 volumes:
     mailcowdockerized_borgbackup_unofficial_dbtemp:
